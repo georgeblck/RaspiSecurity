@@ -167,14 +167,24 @@ for f in camera.capture_continuous(rawCapture, format="bgr", use_video_port=True
                     time.sleep(conf["camera_warmup_time"])
                     print("[INFO] running")
 
-                    if conf["activate_button"]:
-                        movie1 = (
-                            "/home/pi/Videos/[MEME] Why are you gay _.mp4")
-                        movie2 = (
-                            "/home/pi/Videos/SPUNKY BE SNIFFIN ASS.mp4")
-                        playVidwaitButton(
-                            movie1, movie2, conf["which_gpio"])
-                        GPIO.cleanup()
+                if conf["activate_button"]:
+                    movie1 = (
+                        "/home/pi/Videos/[MEME] Why are you gay _.mp4")
+                    movie2 = (
+                        "/home/pi/Videos/SPUNKY BE SNIFFIN ASS.mp4")
+                    DEVNULL = open(os.devnull, 'wb')
+                    # Play first video in loop via omxplayer
+                    omxc = Popen(['omxplayer', '-b', '--loop', movie1],
+                                 stdin=PIPE, stdout=DEVNULL, stderr=STDOUT)
+                    while GPIO.input(pin) == GPIO.HIGH:
+                        time.sleep(0.01)
+                    # if the button is pressed--> Play the second one
+                    os.system('killall omxplayer.bin')
+                    omxc = Popen(['omxplayer', '-b', movie2], stdin=PIPE,
+                                 stdout=DEVNULL, stderr=STDOUT)
+                    # Wait for duration of video
+                    time.sleep(10)
+                    GPIO.cleanup()
 
                 # update the last uploaded timestamp and reset the motion
                 # counter
