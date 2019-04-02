@@ -25,7 +25,7 @@ class TempImage:
 def send_email(conf):
     fromaddr = "address@gmail.com"
     for email_address in conf['email_address']:
-        toaddrs  = email_address
+        toaddrs = email_address
         print("[INFO] Emailing to {}".format(email_address))
         text = 'Hey Someone in Your House!!!!'
         subject = 'Security Alert!!'
@@ -47,7 +47,8 @@ def send_email(conf):
                     fil.read(),
                     Name=basename(f)
                 )
-                part['Content-Disposition'] = 'attachment; filename="%s"' % basename(f)
+                part['Content-Disposition'] = 'attachment; filename="%s"' % basename(
+                    f)
                 msg.attach(part)
 
         # Credentials (if needed) : EDIT THIS
@@ -57,10 +58,9 @@ def send_email(conf):
         # The actual mail send
         server = smtplib.SMTP('smtp.gmail.com:587')
         server.starttls()
-        server.login(username,password)
+        server.login(username, password)
         server.sendmail(fromaddr, toaddrs, msg.as_string())
         server.quit()
-
 
 
 def send_mail(conf, files=None,
@@ -75,15 +75,14 @@ def send_mail(conf, files=None,
 
     msg.attach(MIMEText(text))
 
-
-
     smtp = smtplib.SMTP(server)
     smtp.sendmail(send_from, send_to, msg.as_string())
     smtp.close()
 
+
 def playVidwaitButton(mov1, mov2, pin):
 	try:
-    	from subprocess import DEVNULL # py3k
+    	from subprocess import DEVNULL  # py3k
 	except ImportError:
     	DEVNULL = open(os.devnull, 'wb')
     # Play first video in loop via omxplayer
@@ -96,4 +95,4 @@ def playVidwaitButton(mov1, mov2, pin):
     # Wait for duration of video
     time.sleep(10)
     # And start again from the top
-    #playVidwaitButton(mov1, mov2, pin)
+    # playVidwaitButton(mov1, mov2, pin)
