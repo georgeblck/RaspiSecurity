@@ -81,6 +81,8 @@ def send_mail(conf, files=None,
 
 
 def playVidwaitButton(mov1, mov2, pin):
+    import RPi.GPIO as GPIO
+    from subprocess import Popen, PIPE, STDOUT
     # setup GPIO
     GPIO.setmode(GPIO.BCM)
     GPIO.setup(pin, GPIO.IN, pull_up_down=GPIO.PUD_UP)

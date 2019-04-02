@@ -5,8 +5,6 @@
 # from dropbox.client import DropboxClient
 from picamera.array import PiRGBArray
 from picamera import PiCamera
-from subprocess import Popen, PIPE, STDOUT
-import RPi.GPIO as GPIO
 from utils import send_email, TempImage, playVidwaitButton
 import argparse
 import warnings
