@@ -14,6 +14,6 @@
 	"resolution": [640, 480],
 	"fps": 16,
 	"min_area": 5000,
-	"activate_button": false,
+	"activate_button": true,
 	"which_gpio": 23
 }
