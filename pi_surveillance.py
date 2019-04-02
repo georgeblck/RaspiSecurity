@@ -65,7 +65,7 @@ avg = None
 lastUploaded = datetime.datetime.now()
 motionCounter = 0
 print('[INFO] talking raspi started !!')
-
+print(is_time_between(time(8, 30), time(16, 30)))
 # capture frames from the camera
 for f in camera.capture_continuous(rawCapture, format="bgr", use_video_port=True):
     # grab the raw NumPy array representing the image and initialize
@@ -167,6 +167,7 @@ for f in camera.capture_continuous(rawCapture, format="bgr", use_video_port=True
                     movie1 = moviechoice[0]
                     movie2 = moviechoice[1]
                     print("Motion but not the right time")
+
                     if is_time_between(time(8, 30), time(16, 30)):
                         say_weather("Press the button")
                         say_weather("Press the button")
