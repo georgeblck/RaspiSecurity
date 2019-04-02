@@ -176,7 +176,7 @@ for f in camera.capture_continuous(rawCapture, format="bgr", use_video_port=True
                     # Play first video in loop via omxplayer
                     omxc = Popen(['omxplayer', '-b', '--loop', movie1],
                                  stdin=PIPE, stdout=DEVNULL, stderr=STDOUT)
-                    while GPIO.input(pin) == GPIO.HIGH:
+                    while GPIO.input(conf["which_gpio"]) == GPIO.HIGH:
                         time.sleep(0.01)
                     # if the button is pressed--> Play the second one
                     os.system('killall omxplayer.bin')
