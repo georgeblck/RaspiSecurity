@@ -115,10 +115,10 @@ def say_weather(speech):
 
 
 def play_sound(filename):
+    import os
+    import subprocess
     """ Helper function to play audio files in Linux """
-    play_cmd = "mpg123 {} {} ./{}".format('--pitch',
-                                          4.00, filename)
+    play_cmd = "mpg123 {} {} ./{}".format('--pitch',8.00, filename)
     with open(os.devnull, 'wb') as devnull:
-        subprocess.check_call(
-            play_cmd, stdout=devnull, stderr=subprocess.STDOUT)
-    #os.system(play_cmd)
+        subprocess.check_call(play_cmd, stdout=devnull, stderr=subprocess.STDOUT)
+    # os.system(play_cmd)

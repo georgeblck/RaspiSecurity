@@ -166,7 +166,6 @@ for f in camera.capture_continuous(rawCapture, format="bgr", use_video_port=True
                     moviechoice = random.sample(movielist, 2)
                     movie1 = moviechoice[0]
                     movie2 = moviechoice[1]
-                    print(movie1)
                     say_weather("Press the button")
                     playVidwaitButton(movie1, movie2, int(conf["which_gpio"]))
                     say_weather(
