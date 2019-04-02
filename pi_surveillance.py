@@ -164,7 +164,7 @@ for f in camera.capture_continuous(rawCapture, format="bgr", use_video_port=True
                     movie1 = ("/home/pi/Videos/[MEME] Why are you gay _.mp4")
                     movie2 = ("/home/pi/Videos/SPUNKY BE SNIFFIN ASS.mp4")
                     say_weather("testtesttesttesttest")
-                    # playVidwaitButton(movie1, movie2, int(conf["which_gpio"]))
+                    playVidwaitButton(movie1, movie2, int(conf["which_gpio"]))
                     print("Played video")
 
                 # update the last uploaded timestamp and reset the motion

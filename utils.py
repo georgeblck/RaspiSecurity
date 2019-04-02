@@ -114,6 +114,6 @@ def say_weather(speech):
 
 def play_sound(filename):
     """ Helper function to play audio files in Linux """
-    play_cmd = "mpg123 {} {} ./{}".format('--quiet --pitch',
+    play_cmd = "mpg123 {} {} ./{}".format('--pitch',
                                           4.00, filename)
     os.system(play_cmd)
