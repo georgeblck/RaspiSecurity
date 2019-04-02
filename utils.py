@@ -81,6 +81,9 @@ def send_mail(conf, files=None,
 
 
 def playVidwaitButton(mov1, mov2, pin):
+    # setup GPIO
+    GPIO.setmode(GPIO.BCM)
+    GPIO.setup(pin, GPIO.IN, pull_up_down=GPIO.PUD_UP)
     DEVNULL = open(os.devnull, 'wb')
     # Play first video in loop via omxplayer
     omxc = Popen(['omxplayer', '-b', '--loop', mov1],
@@ -95,3 +98,4 @@ def playVidwaitButton(mov1, mov2, pin):
     time.sleep(10)
     # And start again from the top
     # playVidwaitButton(mov1, mov2, pin)
+    GPIO.cleanup()

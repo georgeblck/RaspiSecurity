@@ -6,6 +6,7 @@
 from picamera.array import PiRGBArray
 from picamera import PiCamera
 from subprocess import Popen, PIPE, STDOUT
+import RPi.GPIO as GPIO
 from utils import send_email, TempImage, playVidwaitButton
 import argparse
 import warnings
@@ -13,7 +14,6 @@ import datetime
 import json
 import time
 import cv2
-import RPi.GPIO as GPIO
 import sys
 import os
 
@@ -51,11 +51,6 @@ if conf["use_dropbox"]:
     (accessToken, userID) = flow.finish(authCode)
     client = DropboxClient(accessToken)
     print "[SUCCESS] dropbox account linked"
-
-if conf["activate_button"]:
-    # setup GPIO
-    GPIO.setmode(GPIO.BCM)
-    GPIO.setup(conf["which_gpio"], GPIO.IN, pull_up_down=GPIO.PUD_UP)
 
 # initialize the camera and grab a reference to the raw camera capture
 camera = PiCamera()
@@ -168,23 +163,10 @@ for f in camera.capture_continuous(rawCapture, format="bgr", use_video_port=True
                     print("[INFO] running")
 
                 if conf["activate_button"]:
-                    movie1 = (
-                        "/home/pi/Videos/[MEME] Why are you gay _.mp4")
-                    movie2 = (
-                        "/home/pi/Videos/SPUNKY BE SNIFFIN ASS.mp4")
-                    DEVNULL = open(os.devnull, 'wb')
-                    # Play first video in loop via omxplayer
-                    omxc = Popen(['omxplayer', '-b', '--loop', movie1],
-                                 stdin=PIPE, stdout=DEVNULL, stderr=STDOUT)
-                    while GPIO.input(conf["which_gpio"]) == GPIO.HIGH:
-                        time.sleep(0.01)
-                    # if the button is pressed--> Play the second one
-                    os.system('killall omxplayer.bin')
-                    omxc = Popen(['omxplayer', '-b', movie2], stdin=PIPE,
-                                 stdout=DEVNULL, stderr=STDOUT)
-                    # Wait for duration of video
-                    time.sleep(10)
-                    GPIO.cleanup()
+                    movie1 = ("/home/pi/Videos/[MEME] Why are you gay _.mp4")
+                    movie2 = ("/home/pi/Videos/SPUNKY BE SNIFFIN ASS.mp4")
+                    playVidwaitButton(movie1, movie2, conf["which_gpio"])
+                    print("Played video")
 
                 # update the last uploaded timestamp and reset the motion
                 # counter
