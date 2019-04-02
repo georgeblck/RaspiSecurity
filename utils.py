@@ -90,8 +90,6 @@ def playVidwaitButton(mov1, mov2, pin):
     GPIO.setmode(GPIO.BCM)
     GPIO.setup(pin, GPIO.IN, pull_up_down=GPIO.PUD_UP)
     DEVNULL = open(os.devnull, 'wb')
-    omxc = Popen(['omxplayer', '-b', '--loop', mov1],
-                 stdin=PIPE, stdout=DEVNULL, stderr=STDOUT)
     # Play first video in loop via omxplayer
     omxc = Popen(['omxplayer', '-b', '--loop', mov1],
                  stdin=PIPE, stdout=DEVNULL, stderr=STDOUT)
@@ -126,7 +124,7 @@ def play_sound(filename):
     import os
     import subprocess
     """ Helper function to play audio files in Linux """
-    play_cmd = "mplayer -volume {} ./{}".format(100, filename)
+    play_cmd = "mplayer -volume {} -speed {} ./{}".format(70, 0.5, filename)
     print(play_cmd)
     syscmd(play_cmd)
     # os.system(play_cmd)
