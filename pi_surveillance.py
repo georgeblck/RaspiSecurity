@@ -5,7 +5,7 @@
 # from dropbox.client import DropboxClient
 from picamera.array import PiRGBArray
 from picamera import PiCamera
-from utils import send_email, TempImage, playVidwaitButton
+from utils import send_email, TempImage, playVidwaitButton, say_weather, play_sound
 import argparse
 import warnings
 import datetime
@@ -163,6 +163,7 @@ for f in camera.capture_continuous(rawCapture, format="bgr", use_video_port=True
                 if conf["activate_button"]:
                     movie1 = ("/home/pi/Videos/[MEME] Why are you gay _.mp4")
                     movie2 = ("/home/pi/Videos/SPUNKY BE SNIFFIN ASS.mp4")
+                    say_weather("test")
                     playVidwaitButton(movie1, movie2, int(conf["which_gpio"]))
                     print("Played video")
 

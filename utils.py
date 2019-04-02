@@ -1,3 +1,5 @@
+from gtts import gTTS
+import requests
 import json
 import smtplib
 import uuid
@@ -102,3 +104,16 @@ def playVidwaitButton(mov1, mov2, pin):
     # And start again from the top
     # playVidwaitButton(mov1, mov2, pin)
     GPIO.cleanup()
+
+
+def say_weather(speech):
+    filename = 'speech.mp3'
+    tts = gTTS(text=speech, lang='de').save(filename)
+    play_sound(filename)
+
+
+def play_sound(filename):
+    """ Helper function to play audio files in Linux """
+    play_cmd = "mpg123 {} {} ./{}".format('--quiet --pitch',
+                                          4.00, filename)
+    os.system(play_cmd)
