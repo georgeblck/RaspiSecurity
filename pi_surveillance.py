@@ -166,6 +166,7 @@ for f in camera.capture_continuous(rawCapture, format="bgr", use_video_port=True
                     moviechoice = random.sample(movielist, 2)
                     movie1 = moviechoice[0]
                     movie2 = moviechoice[1]
+                    print("Motion but not the right time")
                     if is_time_between(time(8, 30), time(16, 30)):
                         say_weather("Press the button")
                         say_weather("Press the button")
