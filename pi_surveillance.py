@@ -5,7 +5,8 @@
 # from dropbox.client import DropboxClient
 from picamera.array import PiRGBArray
 from picamera import PiCamera
-from utils import send_email, TempImage
+from subprocess import Popen, PIPE, STDOUT
+from utils import send_email, TempImage, playVidwaitButton
 import argparse
 import warnings
 import datetime
@@ -15,7 +16,6 @@ import cv2
 import RPi.GPIO as GPIO
 import sys
 import os
-from subprocess import Popen, PIPE, STDOUT
 
 
 # construct the argument parser and parse the arguments
@@ -168,13 +168,13 @@ for f in camera.capture_continuous(rawCapture, format="bgr", use_video_port=True
                     print("[INFO] running")
 
                     if conf["activate_button"]:
-                            movie1 = (
-                                "/home/pi/Videos/[MEME] Why are you gay _.mp4")
-                            movie2 = (
-                                "/home/pi/Videos/SPUNKY BE SNIFFIN ASS.mp4")
-                            playVidwaitButton(
-                                movie1, movie2, conf["which_gpio"])
-                            GPIO.cleanup()
+                        movie1 = (
+                            "/home/pi/Videos/[MEME] Why are you gay _.mp4")
+                        movie2 = (
+                            "/home/pi/Videos/SPUNKY BE SNIFFIN ASS.mp4")
+                        playVidwaitButton(
+                            movie1, movie2, conf["which_gpio"])
+                        GPIO.cleanup()
 
                 # update the last uploaded timestamp and reset the motion
                 # counter

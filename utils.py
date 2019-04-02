@@ -12,14 +12,14 @@ from email.utils import COMMASPACE, formatdate
 
 
 class TempImage:
-	def __init__(self, basePath="./", ext=".jpg"):
-		# construct the file path
-		self.path = "{base_path}/{rand}{ext}".format(base_path=basePath,
-			rand=str(uuid.uuid4()), ext=ext)
+    def __init__(self, basePath="./", ext=".jpg"):
+        # construct the file path
+        self.path = "{base_path}/{rand}{ext}".format(base_path=basePath,
+                                                     rand=str(uuid.uuid4()), ext=ext)
 
-	def cleanup(self):
-		# remove the file
-		os.remove(self.path)
+    def cleanup(self):
+        # remove the file
+        os.remove(self.path)
 
 
 def send_email(conf):
@@ -81,17 +81,16 @@ def send_mail(conf, files=None,
 
 
 def playVidwaitButton(mov1, mov2, pin):
-	try:
-    	from subprocess import DEVNULL  # py3k
-	except ImportError:
-    	DEVNULL = open(os.devnull, 'wb')
+    DEVNULL = open(os.devnull, 'wb')
     # Play first video in loop via omxplayer
-    omxc = Popen(['omxplayer', '-b','--loop', mov1], stdin=PIPE, stdout=DEVNULL, stderr=STDOUT)
+    omxc = Popen(['omxplayer', '-b', '--loop', mov1],
+                 stdin=PIPE, stdout=DEVNULL, stderr=STDOUT)
     while GPIO.input(pin) == GPIO.HIGH:
         time.sleep(0.01)
     # if the button is pressed--> Play the second one
     os.system('killall omxplayer.bin')
-    omxc = Popen(['omxplayer', '-b', mov2], stdin=PIPE, stdout=DEVNULL, stderr=STDOUT)
+    omxc = Popen(['omxplayer', '-b', mov2], stdin=PIPE,
+                 stdout=DEVNULL, stderr=STDOUT)
     # Wait for duration of video
     time.sleep(10)
     # And start again from the top
