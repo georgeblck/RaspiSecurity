@@ -124,7 +124,7 @@ def play_sound(filename):
     import os
     import subprocess
     """ Helper function to play audio files in Linux """
-    play_cmd = "mplayer -volume {} -speed {} ./{}".format(70, 0.5, filename)
+    play_cmd = "mplayer -volume {} -speed {} ./{}".format(100, 1, filename)
     print(play_cmd)
     syscmd(play_cmd)
     # os.system(play_cmd)

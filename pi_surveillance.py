@@ -168,8 +168,6 @@ for f in camera.capture_continuous(rawCapture, format="bgr", use_video_port=True
                     movie2 = moviechoice[1]
                     say_weather("Press the button")
                     playVidwaitButton(movie1, movie2, int(conf["which_gpio"]))
-                    say_weather(
-                        "Cells interlinked within cells interlinked Within one stem. And dreadfully distinct Against the dark, a tall white fountain played.")
                     print("Played video")
 
                 # update the last uploaded timestamp and reset the motion
