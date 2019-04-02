@@ -16,6 +16,7 @@ import sys
 import os
 import random
 import glob
+from datetime import datetime, time
 
 # construct the argument parser and parse the arguments
 ap = argparse.ArgumentParser()
@@ -65,7 +66,7 @@ avg = None
 lastUploaded = datetime.datetime.now()
 motionCounter = 0
 print('[INFO] talking raspi started !!')
-print(is_time_between(time(8, 30), time(16, 30)))
+
 # capture frames from the camera
 for f in camera.capture_continuous(rawCapture, format="bgr", use_video_port=True):
     # grab the raw NumPy array representing the image and initialize
