@@ -16,7 +16,6 @@ import sys
 import os
 import random
 import glob
-from datetime import datetime, time
 
 # construct the argument parser and parse the arguments
 ap = argparse.ArgumentParser()
@@ -169,7 +168,7 @@ for f in camera.capture_continuous(rawCapture, format="bgr", use_video_port=True
                     movie2 = moviechoice[1]
                     print("Motion but not the right time")
 
-                    if is_time_between(time(8, 30), time(16, 30)):
+                    if is_time_between(datetime.time(8, 30), datetime.time(16, 30)):
                         say_weather("Press the button")
                         say_weather("Press the button")
                         playVidwaitButton(
