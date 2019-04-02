@@ -167,6 +167,7 @@ for f in camera.capture_continuous(rawCapture, format="bgr", use_video_port=True
                     movie1 = moviechoice[0]
                     movie2 = moviechoice[1]
                     say_weather("Press the button")
+                    say_weather("Press the button")
                     playVidwaitButton(movie1, movie2, int(conf["which_gpio"]))
                     print("Played video")
 
