@@ -166,10 +166,12 @@ for f in camera.capture_continuous(rawCapture, format="bgr", use_video_port=True
                     moviechoice = random.sample(movielist, 2)
                     movie1 = moviechoice[0]
                     movie2 = moviechoice[1]
-                    say_weather("Press the button")
-                    say_weather("Press the button")
-                    playVidwaitButton(movie1, movie2, int(conf["which_gpio"]))
-                    print("Played video")
+                    if is_time_between(time(8, 30), time(16, 30)):
+                        say_weather("Press the button")
+                        say_weather("Press the button")
+                        playVidwaitButton(
+                            movie1, movie2, int(conf["which_gpio"]))
+                        print("Played video")
 
                 # update the last uploaded timestamp and reset the motion
                 # counter
