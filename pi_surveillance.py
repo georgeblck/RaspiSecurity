@@ -15,6 +15,7 @@ import cv2
 import sys
 import os
 import random
+import glob
 
 # construct the argument parser and parse the arguments
 ap = argparse.ArgumentParser()
@@ -161,11 +162,11 @@ for f in camera.capture_continuous(rawCapture, format="bgr", use_video_port=True
                     print("[INFO] running")
 
                 if conf["activate_button"]:
-                    movielist = [os.path.abspath(
-                        x) for x in os.listdir("/home/pi/Videos/")]
+                    movielist = glob.glob("/home/pi/Videos/*.mp4")
                     moviechoice = random.sample(movielist, 2)
                     movie1 = moviechoice[0]
                     movie2 = moviechoice[1]
+                    print(movie1)
                     say_weather("Press the button")
                     playVidwaitButton(movie1, movie2, int(conf["which_gpio"]))
                     say_weather(
