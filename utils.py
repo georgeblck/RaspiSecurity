@@ -90,6 +90,8 @@ def playVidwaitButton(mov1, mov2, pin):
     GPIO.setmode(GPIO.BCM)
     GPIO.setup(pin, GPIO.IN, pull_up_down=GPIO.PUD_UP)
     DEVNULL = open(os.devnull, 'wb')
+    omxc = Popen(['omxplayer', '-b', '--loop', mov1],
+                 stdin=PIPE, stdout=DEVNULL, stderr=STDOUT)
     # Play first video in loop via omxplayer
     omxc = Popen(['omxplayer', '-b', '--loop', mov1],
                  stdin=PIPE, stdout=DEVNULL, stderr=STDOUT)

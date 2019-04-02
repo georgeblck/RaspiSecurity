@@ -14,7 +14,7 @@ import time
 import cv2
 import sys
 import os
-
+import random
 
 # construct the argument parser and parse the arguments
 ap = argparse.ArgumentParser()
@@ -161,10 +161,15 @@ for f in camera.capture_continuous(rawCapture, format="bgr", use_video_port=True
                     print("[INFO] running")
 
                 if conf["activate_button"]:
-                    movie1 = ("/home/pi/Videos/[MEME] Why are you gay _.mp4")
-                    movie2 = ("/home/pi/Videos/SPUNKY BE SNIFFIN ASS.mp4")
-                    say_weather("testtesttesttesttest")
+                    movielist = [os.path.abspath(
+                        x) for x in os.listdir("/home/pi/Videos/")]
+                    moviechoice = random.sample(movielist, 2)
+                    movie1 = moviechoice[0]
+                    movie2 = moviechoice[1]
+                    say_weather("Press the button")
                     playVidwaitButton(movie1, movie2, int(conf["which_gpio"]))
+                    say_weather(
+                        "Cells interlinked within cells interlinked Within one stem. And dreadfully distinct Against the dark, a tall white fountain played.")
                     print("Played video")
 
                 # update the last uploaded timestamp and reset the motion
