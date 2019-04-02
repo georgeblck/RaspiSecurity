@@ -12,6 +12,11 @@ import datetime
 import json
 import time
 import cv2
+import RPi.GPIO as GPIO
+import sys
+import os
+from subprocess import Popen, PIPE, STDOUT
+
 
 # construct the argument parser and parse the arguments
 ap = argparse.ArgumentParser()
@@ -27,7 +32,7 @@ warnings.filterwarnings("ignore")
 conf = json.load(open(args["conf"]))
 client = None
 
-# set debug mode on 
+# set debug mode on
 if args['debug']:
 	print(' > Debug mode is on !')
 	debug_mode = True
@@ -45,6 +50,11 @@ if conf["use_dropbox"]:
 	(accessToken, userID) = flow.finish(authCode)
 	client = DropboxClient(accessToken)
 	print "[SUCCESS] dropbox account linked"
+
+if conf["activate_button"]:
+	# setup GPIO
+	GPIO.setmode(GPIO.BCM)
+	GPIO.setup(conf["which_gpio"], GPIO.IN, pull_up_down=GPIO.PUD_UP)
 
 # initialize the camera and grab a reference to the raw camera capture
 camera = PiCamera()
@@ -73,7 +83,7 @@ for f in camera.capture_continuous(rawCapture, format="bgr", use_video_port=True
 	# COMPUTER VISION
 	######################################################################
 	# resize the frame, convert it to grayscale, and blur it
-	# TODO: resize image here into cmaller sizes 
+	# TODO: resize image here into cmaller sizes
 	gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
 	gray = cv2.GaussianBlur(gray, tuple(conf['blur_size']), 0)
 
@@ -156,6 +166,11 @@ for f in camera.capture_continuous(rawCapture, format="bgr", use_video_port=True
                                         time.sleep(conf["camera_warmup_time"])
                                         print("[INFO] running")
 
+								if conf["activate_button"]:
+									movie1 = ("/home/pi/Videos/[MEME] Why are you gay _.mp4")
+									movie2 = ("/home/pi/Videos/SPUNKY BE SNIFFIN ASS.mp4")
+									playVidwaitButton(movie1, movie2, conf["which_gpio"])
+									GPIO.cleanup()
                                 # update the last uploaded timestamp and reset the motion
                                 # counter
                                 lastUploaded = timestamp
