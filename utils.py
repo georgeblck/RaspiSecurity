@@ -126,7 +126,7 @@ def play_sound(filename):
     import os
     import subprocess
     """ Helper function to play audio files in Linux """
-    play_cmd = "mpg123 {} {} ./{}".format('--pitch', 8.00, filename)
+    play_cmd = "mplayer -volume {} ./{}".format(100, filename)
     print(play_cmd)
     syscmd(play_cmd)
     # os.system(play_cmd)
